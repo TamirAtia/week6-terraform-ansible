@@ -21,7 +21,7 @@ resource "azurerm_private_dns_zone_virtual_network_link" "Vnet-link" {
 
 # ************ Create postgresql flexible ************
 resource "azurerm_postgresql_flexible_server" "DataBase" {
-  name                   = "postgresql-flexible-server"
+  name                   = "postgresql-flexible-server-bootcamp"
   resource_group_name    = var.resource_group_name
   location               = var.location
   version                = "12"
