@@ -1,5 +1,4 @@
-
-resource_group_name = "rg_week5"
+resource_group_name = "production"
 location            = "eastus"
 
 num_of_instances                = 3

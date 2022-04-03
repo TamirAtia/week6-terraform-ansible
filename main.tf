@@ -1,5 +1,5 @@
 #*****************resource group***************
-resource "azurerm_resource_group" "rg_week5" {
+resource "azurerm_resource_group" "RG" {
   name     = var.resource_group_name
   location = var.location
 }
@@ -9,8 +9,8 @@ resource "azurerm_resource_group" "rg_week5" {
 module "Network" {
   source = "./modules/Network"
 
-  resource_group_name = azurerm_resource_group.rg_week5.name
-  location            = azurerm_resource_group.rg_week5.location
+  resource_group_name = azurerm_resource_group.RG.name
+  location            = azurerm_resource_group.RG.location
   
   myIP_Address         = var.myIP_Address
 
@@ -21,8 +21,8 @@ module "Network" {
 module "LoadBalancer" {
   source = "./modules/LoadBalancer"
 
-  resource_group_name = azurerm_resource_group.rg_week5.name
-  location            = azurerm_resource_group.rg_week5.location
+  resource_group_name = azurerm_resource_group.RG.name
+  location            = azurerm_resource_group.RG.location
 }
 #******************************************************
 
@@ -30,8 +30,8 @@ module "LoadBalancer" {
 module "PostgerSql" {
   source = "./modules/PostgreSql"
 
-  resource_group_name             = azurerm_resource_group.rg_week5.name
-  location                        = azurerm_resource_group.rg_week5.location
+  resource_group_name             = azurerm_resource_group.RG.name
+  location                        = azurerm_resource_group.RG.location
   vnet-ID                         = module.Network.vnet-ID
   private_subnet_id               = module.Network.private_subnet_id
   postgres_administrator_login    = var.postgres_administrator_login
@@ -43,8 +43,8 @@ module "PostgerSql" {
 module "VMSS" {
   source = "./modules/VMSS"
 
-  resource_group_name    = azurerm_resource_group.rg_week5.name
-  location               = azurerm_resource_group.rg_week5.location
+  resource_group_name    = azurerm_resource_group.RG.name
+  location               = azurerm_resource_group.RG.location
   admin_username         = var.admin_username
   admin_password         = var.admin_password
   num_of_instances       = var.num_of_instances
@@ -60,8 +60,8 @@ module "AnsibleControllerVM" {
   
   source = "./modules/AnsibleControllerVM"
 
-  resource_group_name  = azurerm_resource_group.rg_week5.name
-  location             = azurerm_resource_group.rg_week5.location
+  resource_group_name  = azurerm_resource_group.RG.name
+  location             = azurerm_resource_group.RG.location
   
   
   admin_username       = var.admin_username
