@@ -1,6 +1,7 @@
 resource_group_name = "staging"
 location            = "eastus"
 
+sku                             = "Standard_F2"
 num_of_instances                = 2
 admin_username                  = ""
 admin_password                  = ""

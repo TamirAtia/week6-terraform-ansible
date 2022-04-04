@@ -11,8 +11,8 @@ module "Network" {
 
   resource_group_name = azurerm_resource_group.RG.name
   location            = azurerm_resource_group.RG.location
-  
-  myIP_Address         = var.myIP_Address
+
+  myIP_Address = var.myIP_Address
 
 }
 #******************************************************
@@ -51,22 +51,23 @@ module "VMSS" {
   public_subnet_id       = module.Network.public_subnet_id
   LB_backend_add_pool_id = module.LoadBalancer.LB_backend_add_pool_id
   virtual_network_name   = module.Network.vnet-Name
+  sku                    = var.sku
 
 
 }
 #******************************************************
 
 module "AnsibleControllerVM" {
-  
+
   source = "./modules/AnsibleControllerVM"
 
-  resource_group_name  = azurerm_resource_group.RG.name
-  location             = azurerm_resource_group.RG.location
-  
-  
-  admin_username       = var.admin_username
-  admin_password       = var.admin_password
-  ansible_nic_id       = module.Network.ansible_nic_id
+  resource_group_name = azurerm_resource_group.RG.name
+  location            = azurerm_resource_group.RG.location
+
+
+  admin_username = var.admin_username
+  admin_password = var.admin_password
+  ansible_nic_id = module.Network.ansible_nic_id
 
   host_url = module.LoadBalancer.LoadBalacer_ip_address
   pg_host  = "${module.PostgerSql.azurerm_postgresql_flexible_server_name}.postgres.database.azure.com"

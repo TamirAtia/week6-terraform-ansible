@@ -1,6 +1,7 @@
 resource_group_name = "production"
 location            = "eastus"
 
+sku                             = "Standard_B1ls"
 num_of_instances                = 3
 admin_username                  = ""
 admin_password                  = ""

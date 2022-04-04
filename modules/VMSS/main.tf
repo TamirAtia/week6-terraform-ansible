@@ -1,9 +1,9 @@
 # *******************scale set virtual machine configuration*************
 resource "azurerm_linux_virtual_machine_scale_set" "scale_set" {
-  name                            = "scale-set"
+  name                            = "scale-set-${lower(terraform.workspace)}"
   resource_group_name             = var.resource_group_name
   location                        = var.location
-  sku                             = "Standard_F2"
+  sku                             = var.sku
   instances                       = var.num_of_instances
   admin_username                  = var.admin_username
   admin_password                  = var.admin_password

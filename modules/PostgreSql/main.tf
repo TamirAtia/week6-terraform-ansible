@@ -1,7 +1,7 @@
 
 # ************ Create Managed PostgreSql *************
 resource "azurerm_private_dns_zone" "Dns-Zone" {
-  name                = "postgres-flexiable.postgres.database.azure.com"
+  name                = "postgres-flexiable-${lower(terraform.workspace)}.postgres.database.azure.com"
   resource_group_name = var.resource_group_name
   depends_on = [var.resource_group_name]
 
@@ -10,7 +10,7 @@ resource "azurerm_private_dns_zone" "Dns-Zone" {
 
 # ************ Link to my Vnet ************
 resource "azurerm_private_dns_zone_virtual_network_link" "Vnet-link" {
-  name                  = "vnet-zone.com"
+  name                  = "vnet-zone-${lower(terraform.workspace)}.com"
   private_dns_zone_name = azurerm_private_dns_zone.Dns-Zone.name
   virtual_network_id    = var.vnet-ID
   resource_group_name   = var.resource_group_name
@@ -30,6 +30,7 @@ resource "azurerm_postgresql_flexible_server" "DataBase" {
   administrator_login    = var.postgres_administrator_login
   administrator_password = var.postgres_administrator_password
   zone                   = "1"
+  create_mode            = "Default"
   storage_mb = 32768
   sku_name   = "B_Standard_B1ms"
   depends_on = [azurerm_private_dns_zone_virtual_network_link.Vnet-link, var.private_subnet_id]

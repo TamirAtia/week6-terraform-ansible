@@ -39,3 +39,6 @@ variable "virtual_network_name" {
   description = "Virtual Network name"
 }
 
+variable "sku" {
+  
+}

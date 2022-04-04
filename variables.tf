@@ -58,3 +58,5 @@ variable "okta_secret" {
 variable "okta_key" {
 
 }
+
+variable "sku" {}
