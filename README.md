@@ -14,9 +14,10 @@
 in `production.tfvars` and `staging.tfvars` you have those variables and you will need to fill the blanks one
 
 ```
-resource_group_name = "rg_week5"
+resource_group_name = "staging"
 location            = "eastus"
 
+sku                             = "Standard_F2"
 num_of_instances                = 2
 admin_username                  = ""
 admin_password                  = ""
